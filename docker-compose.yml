@@ -19,3 +19,14 @@ services:
       EVENTS_EXCHANGE: events
     depends_on:
       - rabbitmq
+
+  web-ui:
+    build:
+      context: .
+      dockerfile: services/web-ui/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      BOOKING_SERVICE_URL: http://booking:8000
+    depends_on:
+      - booking

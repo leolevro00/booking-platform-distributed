@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Booking Web UI</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <style>
+    body { font-family: system-ui, Arial; margin: 40px; max-width: 780px; }
+    input, button { padding: 10px; margin: 6px 0; width: 100%; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; margin-top: 18px; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Booking Platform</h1>
+  <p>Web UI (FastAPI + Jinja2 + HTMX) → chiama <code>booking-service</code>.</p>
+
+  <div class="card">
+    <h2>Crea prenotazione</h2>
+
+    <form
+      hx-post="/ui/bookings"
+      hx-target="#result"
+      hx-swap="innerHTML"
+    >
+      <label>Facility ID</label>
+      <input name="facility_id" placeholder="campo-1" required />
+
+      <label>Data</label>
+      <input name="date" placeholder="2025-12-20" required />
+
+      <label>Ora</label>
+      <input name="time" placeholder="18:00" required />
+
+      <label>User ID</label>
+      <input name="user_id" placeholder="u1" required />
+
+      <button type="submit">Prenota</button>
+    </form>
+
+    <div id="result" style="margin-top: 14px;"></div>
+  </div>
+</body>
+</html>
