@@ -1,0 +1,5 @@
+services:
+  booking:
+    build: ./services/booking
+    ports:
+      - "8001:8000"
