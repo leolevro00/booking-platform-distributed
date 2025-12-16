@@ -1,5 +1,21 @@
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   booking:
-    build: ./services/booking
+    build:
+      context: .
+      dockerfile: services/booking/Dockerfile
     ports:
       - "8001:8000"
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      EVENTS_EXCHANGE: events
+    depends_on:
+      - rabbitmq
