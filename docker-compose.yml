@@ -30,3 +30,14 @@ services:
       BOOKING_SERVICE_URL: http://booking:8000
     depends_on:
       - booking
+
+  availability:
+    build:
+      context: .
+      dockerfile: services/availability/Dockerfile
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672/
+      EVENTS_EXCHANGE: events
+    depends_on:
+      - rabbitmq
+
